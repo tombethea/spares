@@ -2,7 +2,7 @@ import os
 import pandas as pd
 
 # Read the first Excel file
-data = pd.read_excel(r"C:\Users\thbethea\Desktop\allspares.xlsx")
+data = pd.read_excel(r"path-to-inventory file")
 
 # Count occurrences of each unique item
 item_counts = data["Item"].value_counts().reset_index()
@@ -12,7 +12,7 @@ item_counts.columns = ["Item Code", "Count"]
 item_counts["Item Code"] = item_counts["Item Code"].astype(str)
 
 # Read the second Excel file for item descriptions
-descriptions = pd.read_excel(r"C:\Users\thbethea\Desktop\DSCS Full Item Number List.xlsx")
+descriptions = pd.read_excel(r"path-to-item no-mapping-to-item-descriptions")
 
 # Ensure the 'Item Code' column in descriptions is a string
 descriptions["Item Code"] = descriptions["Item Code"].astype(str)
@@ -25,7 +25,7 @@ final_output = merged_data[["Item Code", "Count", "Item Description"]]
 final_output = final_output.sort_values(by="Count", ascending=False)
 
 # Save the result to the specified location on Desktop
-output_path = r"C:\Users\thbethea\Desktop\final_item_counts_with_descriptions.xlsx"
+output_path = r"path-where-output-file-will-be"
 final_output.to_excel(output_path, index=False)
 
 print(f"Output saved to '{output_path}'.")
@@ -40,7 +40,7 @@ subinventory = input("Enter the subinventory value to include in the final templ
 top_items = final_output.head(num_items)
 
 # Create a folder named "serials" on the Desktop
-serials_folder = r"C:\Users\thbethea\Desktop\serials"
+serials_folder = r"path-to-output-folder-for-serials"
 os.makedirs(serials_folder, exist_ok=True)
 
 # Prepare a list for the final Excel sheet
@@ -94,7 +94,7 @@ for col in columns:
 final_serials_df = final_serials_df[columns]
 
 # Save the final sheet to an Excel file on the desktop
-final_excel_path = r"C:\Users\thbethea\Desktop\final_serials_template.xlsx"
+final_excel_path = r"this-is-the-output-template-path"
 final_serials_df.to_excel(final_excel_path, index=False)
 
 print(f"Final serials template saved to '{final_excel_path}'.")
